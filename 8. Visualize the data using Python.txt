@@ -1,0 +1,106 @@
+8. Visualize the data using Python libraries matplotlib, seaborn by plotting the graphs
+for airquality dataset.(Use Air_quality_forvisualization.csv)( Charts : Line chart,
+Barplot, Heatmap, Scatterplot, histogram, boxplot, violin, timeseries chart)
+
+1.	import pandas as pd
+              import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+2.	pip install –updates seaborn
+3.	df = pd.read_csv('AirQuality-chart,bar,hist.csv',delimiter=';')
+4.	df
+5.	df.head()
+6.	df.columns
+
+------------------HEATMAP-------------------
+# Plot correlation heatmap
+plt.figure(figsize=(8, 6))
+sns.heatmap(df.corr(), annot=True, cmap='coolwarm')
+plt.title('Correlation Heatmap')
+plt.show()
+
+--------------BARPLOT------------
+1.	print (df.head())
+2.	import seaborn as sns
+import matplotlib.pyplot as plt
+
+# Aggregate by Year if you want to see average NO2 per year
+df['Year'] = df['Date'].dt.year
+sns.barplot(x='Year', y='NO2(GT)', data=df)
+plt.title('Average NO2(GT) by Year')
+plt.xlabel('Year')
+plt.ylabel('NO2(GT)')
+plt.show()
+
+-------------SCATTERPLOT------------
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+# Plot Scatterplot between 'NO2(GT)' and 'T' (Temperature)
+sns.scatterplot(x='NO2(GT)', y='T', data=df)
+plt.title('Scatterplot of NO2(GT) vs Temperature')
+plt.xlabel('NO2(GT)')
+plt.ylabel('Temperature (T)')
+plt.show()
+ 
+--------------BOXPLOT------------
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+# Boxplot to check the distribution of 'NO2(GT)' across different years
+sns.boxplot(x='Year', y='NO2(GT)', data=df)
+plt.title('Boxplot of NO2(GT) by Year')
+plt.xlabel('Year')
+plt.ylabel('NO2(GT)')
+plt.show()
+
+--------------VIOLIN PLOT---------
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+# Violin plot to show the distribution of 'NO2(GT)' for each year
+sns.violinplot(x='Year', y='NO2(GT)', data=df)
+plt.title('Violin Plot of NO2(GT) by Year')
+plt.xlabel('Year')
+plt.ylabel('NO2(GT)')
+plt.show()
+
+-------------TIMESERIES CHART------------
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+# Convert 'Date' to datetime
+df['Date'] = pd.to_datetime(df['Date'], format='%d/%m/%Y')
+
+# Time series chart for 'NO2(GT)' over 'Date'
+sns.lineplot(x='Date', y='NO2(GT)', data=df)
+plt.title('Time Series of NO2(GT) over Time')
+plt.xlabel('Date')
+plt.ylabel('NO2(GT)')
+plt.xticks(rotation=45)
+plt.show()
+
+----------HISTOGRAM------------
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+# Plot histogram for the 'NO2(GT)' column
+sns.distplot(df['NO2(GT)'], kde=True)
+plt.title('Histogram of NO2(GT)')
+plt.xlabel('NO2(GT)')
+plt.ylabel('Frequency')
+plt.show()
+
+---------LINE CHART-----------------
+import matplotlib.pyplot as plt
+
+# Convert 'CO(GT)' to float (fix comma decimals if needed)
+df['CO(GT)'] = df['CO(GT)'].str.replace(',', '.').astype(float)
+
+# Plot the first 100 values for simplicity
+plt.plot(df['CO(GT)'][:100])
+plt.title('CO(GT) - First 100 Observations')
+plt.xlabel('Index')
+plt.ylabel('CO(GT)')
+plt.show()
+
